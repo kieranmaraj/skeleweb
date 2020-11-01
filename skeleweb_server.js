@@ -2,10 +2,11 @@ const express = require("express");// use express to serve up the UI page
 // const express = require('express');
 // const http = require("http").Server(express());// Socket.IO uses an http server
 // const io = require("socket.io")(http);
-const io = require("socket.io");
+const socketIO = require('socket.io');
 const path = require('path');
 
 const PORT = process.env.PORT || 5000;
+const INDEX = '/index.html';
 
 console.log("what is going on")
 
@@ -29,11 +30,12 @@ let classify_data;
 //     res.render(__dirname + '/index.html');
 // });
 
-express()
-    .use(express.static(path.join(__dirname, 'public')))
-    .get('/', (req, res) => res.render('/index'))
+const server = express()
+    .use((req, res) => res.sendFile(INDEX, {root: __dirname}))
+    // .get('/', (req, res) => res.render('/index'))
     .listen(PORT, () => console.log(`Listening on port : ${PORT}`))
 
+const io = socketIO(server);
 
 io.on("connection", function(socket){
     socket.emit("getType");
