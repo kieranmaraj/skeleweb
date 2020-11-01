@@ -1,9 +1,9 @@
 const express = require("express");// use express to serve up the UI page
-const app = express();
+const express = require('express');
 const http = require("http").Server(app);// Socket.IO uses a http server
 const io = require("socket.io")(http);
 
-const PORT = 8090;
+const PORT = process.env.PORT || 5000;
 
 console.log("what")
 
@@ -23,9 +23,14 @@ let skeletime_data;
 let classify_broadcast = false;
 let classify_data;
 
-app.get('/', (req, res) => {
-    res.render(__dirname + '/index.html');
-});
+// app.get('/', (req, res) => {
+//     res.render(__dirname + '/index.html');
+// });
+
+express()
+    .get('/', (req, res) => res.render('/index'))
+    .listen(PORT, () => console.log(`Listening on port ${PORT}`))
+
 
 io.on("connection", function(socket){
     socket.emit("getType");
@@ -90,6 +95,6 @@ io.on("connection", function(socket){
 })
 
 
-http.listen(PORT, function () {
-	console.log("listening on *:" + PORT);
-});
+// http.listen(PORT, function () {
+// 	console.log("listening on *:" + PORT);
+// });
