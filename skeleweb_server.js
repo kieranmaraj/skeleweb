@@ -1,7 +1,8 @@
 const express = require("express");// use express to serve up the UI page
 // const express = require('express');
 // const http = require("http").Server(express());// Socket.IO uses an http server
-const io = require("socket.io")(http);
+// const io = require("socket.io")(http);
+const io = require("socket.io");
 const path = require('path');
 
 const PORT = process.env.PORT || 5000;
