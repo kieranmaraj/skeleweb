@@ -1,6 +1,6 @@
 const express = require("express");// use express to serve up the UI page
-const express = require('express');
-const http = require("http").Server(app);// Socket.IO uses a http server
+// const express = require('express');
+const http = require("http").Server(app);// Socket.IO uses an http server
 const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 5000;
@@ -29,7 +29,7 @@ let classify_data;
 
 express()
     .get('/', (req, res) => res.render('/index'))
-    .listen(PORT, () => console.log(`Listening on port ${PORT}`))
+    // .listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
 
 io.on("connection", function(socket){
@@ -95,6 +95,6 @@ io.on("connection", function(socket){
 })
 
 
-// http.listen(PORT, function () {
-// 	console.log("listening on *:" + PORT);
-// });
+http.listen(PORT, function () {
+	console.log("listening on *:" + PORT);
+});
