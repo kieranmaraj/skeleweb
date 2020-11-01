@@ -4,9 +4,9 @@ const http = require("http").Server(express());// Socket.IO uses an http server
 const io = require("socket.io")(http);
 const path = require('path');
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
-console.log("what")
+console.log("what is going on")
 
 // Server needs to handle connections from 4 types of patches, 2 pairs of broadcasters and receivers
 //
@@ -98,5 +98,5 @@ io.on("connection", function(socket){
 
 
 http.listen(PORT, function () {
-	console.log("listening on *:" + PORT);
+	console.log("listening on *: " + PORT);
 });
