@@ -1,1 +1,1 @@
-web: node index.js
+web: node skeleweb_server.js
