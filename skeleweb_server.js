@@ -24,7 +24,7 @@ let classify_broadcast = false;
 let classify_data;
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.render(__dirname + '/index.html');
 });
 
 io.on("connection", function(socket){
