@@ -2,6 +2,7 @@ const express = require("express");// use express to serve up the UI page
 // const express = require('express');
 const http = require("http").Server(express());// Socket.IO uses an http server
 const io = require("socket.io")(http);
+const path = require('path');
 
 const PORT = process.env.PORT || 5000;
 
@@ -28,6 +29,7 @@ let classify_data;
 // });
 
 express()
+    .use(express.static(path.join(__dirname, 'public')))
     .get('/', (req, res) => res.render('/index'))
     // .listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
