@@ -41,7 +41,7 @@ io.on("connection", function(socket){
     socket.emit("getType");
 
     socket.on("assignType", (type)=>{
-        console.log("received type: " + type);
+        // console.log("received type: " + type);
 
         if(type==="data_broadcast"){
             if(!data_broadcast){
@@ -83,6 +83,16 @@ io.on("connection", function(socket){
     socket.on("classificationData", (data)=>{
         classify_data = data;
         console.log("classification", classify_data);
+
+        io.sockets.clients((error, clients)=>{
+            if(error) throw error;
+            for(let i = 0; i < clients.length; i++){
+                if(io.sockets.connected[clients[i]].type === 'data_receiver'){
+                    // socket.emit("rawData", data);
+                    io.sockets.connected[clients[i]].emit('classifyData', data);
+                }
+            }
+        })
     });
 
     socket.on("disconnect", function(){
